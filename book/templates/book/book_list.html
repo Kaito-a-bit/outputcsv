@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja">
+
+<body>
+    <a href="{% url 'book:export' %}">Export</a> 
+    {% for book in book_list %}
+    <div>
+      {{ book.id }}
+      {{ book.name }}
+      {{ book.publisher.name}}
+      {{ book.coauthors }} 
+      {{ book.published_date }}
+    </div>
+    {% endfor %}
+</body>
+
+</html>
+
