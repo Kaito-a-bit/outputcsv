@@ -8,7 +8,9 @@
       {{ book.id }}
       {{ book.name }}
       {{ book.publisher.name}}
-      {{ book.coauthors }} 
+      {% for author in book.coauthors.all %}
+        {{ author }}
+      {% endfor %}
       {{ book.published_date }}
     </div>
     {% endfor %}

@@ -7,12 +7,16 @@ import csv
 class BookListView(ListView):
     template_name = 'book_list.html'
     model = Book
-    
+
 
 def csv_export(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="books.csv"'
     writer = csv.writer(response)
     for book in Book.objects.all():
-        writer.writerow([book.id, book.name, book.publisher.name, book.published_date])
+        row = []
+        for author in book.coauthors.all():
+            row.append(author.username)
+        strAuthors = " ".join(row)
+        writer.writerow([book.id, book.name, book.publisher.name, strAuthors, book.published_date])
     return response
