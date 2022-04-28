@@ -1,3 +1,4 @@
+import string
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import HttpResponse
@@ -14,9 +15,6 @@ def csv_export(request):
     response['Content-Disposition'] = 'attachment; filename="books.csv"'
     writer = csv.writer(response)
     for book in Book.objects.all():
-        row = []
-        for author in book.coauthors.all():
-            row.append(author.username)
-        strAuthors = " ".join(row)
+        strAuthors = " ".join([author.username for author in book.coauthors.all()])
         writer.writerow([book.id, book.name, book.publisher.name, strAuthors, book.published_date])
     return response
