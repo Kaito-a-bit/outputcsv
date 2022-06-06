@@ -2,7 +2,9 @@ import string
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import HttpResponse
+from django_tables2 import SingleTableView
 from .models import Book, Publisher, User
+from .tables import BookTable
 import csv
 
 class BookListView(ListView):
@@ -18,3 +20,10 @@ def csv_export(request):
         strAuthors = " ".join([author.username for author in book.coauthors.all()])
         writer.writerow([book.id, book.name, book.publisher.name, strAuthors, book.published_date])
     return response
+
+class DetailView(SingleTableView):
+    table_class = BookTable
+    template_name = 'detail.html'
+
+    def get_queryset(self):
+        return Book.objects.all()

@@ -1,0 +1,23 @@
+{% load render_table from django_tables2 %}
+<!doctype html>
+<html>
+    <head>
+        <title>django_tables2_chart_visualize</title>
+        <!-- bootstrap4で可視化 -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- ウィンドウサイズに合わせて枠の大きさを変える -->
+        <div class="container-fluid">
+            <!-- 水平方向の横スクロールバーを加える -->
+            <div class="table-responsive col-auto">
+                <!-- 縞ストライプで見やすくする -->
+                <table class="table table-striped">
+                    {% render_table table %}
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
