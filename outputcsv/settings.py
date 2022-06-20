@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'book.apps.BookConfig',
     'django_tables2',
+    'wkhtmltopdf',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

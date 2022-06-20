@@ -1,14 +1,15 @@
 import string
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.http import HttpResponse
 from django_tables2 import SingleTableView
 from .models import Book, Publisher, User
 from .tables import BookTable
+from wkhtmltopdf.views import PDFTemplateView
 import csv
 
 class BookListView(ListView):
-    template_name = 'book_list.html'
+    template_name = 'book/book_list.html'
     model = Book
 
 
@@ -23,7 +24,14 @@ def csv_export(request):
 
 class DetailView(SingleTableView):
     table_class = BookTable
-    template_name = 'detail.html'
+    template_name = 'book/detail.html'
+
+    def get_queryset(self):
+        return Book.objects.all()
+
+class PdfSampleView(PDFTemplateView):
+    filename = 'detail.pdf'
+    template_name = 'book/detail.html'
 
     def get_queryset(self):
         return Book.objects.all()

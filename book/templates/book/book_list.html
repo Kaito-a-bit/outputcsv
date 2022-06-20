@@ -3,6 +3,7 @@
 
 <body>
     <a href="{% url 'book:export' %}">Export</a> 
+    <a href="{% url 'book:pdf' %}">PDF</a>
     {% for book in book_list %}
     <div>
       {{ book.id }}
